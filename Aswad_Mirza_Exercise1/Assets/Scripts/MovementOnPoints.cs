@@ -57,9 +57,10 @@ public class MovementOnPoints : MonoBehaviour
     // and returning the next point to get to our destination based on the direction and speed
     Vector3 CalculateDestination(Vector3 source, Vector3 destination, float _speed)
     {
-
+        // vector math to get the direction
         Vector3 direction = (destination - source).normalized;
 
+        // vector math to get the next "step" or point to get to our destination
         source += (direction * (_speed * Time.deltaTime));
         return source;
     }
@@ -72,7 +73,7 @@ public class MovementOnPoints : MonoBehaviour
         // i spent alot of time trying to find specific points and checking if two points are exactly the same
         // and then found out this function exists.
 
-        if (Vector3.Distance(transform.position, Destination) <= 0.1)
+        if (Vector3.Distance(transform.position, _destination) <= 0.1)
         {
 
             // we made it to our destination so this is true
@@ -87,71 +88,7 @@ public class MovementOnPoints : MonoBehaviour
             // we are back to where we started so now we have to go back to our destination
             _isAtDestination = false;
             transform.Rotate(0, 180, 0);
-        }
-
-        // integer casting to avoid complications with Floating point numbers
-
-        /*
-        if ((int)transform.position.z == (int)_destination.z)
-        {
-            _isAtDestination = true;
-            transform.Rotate(0, 180, 0);
-        }
-
-        else if ((int)transform.position.z == (int)_startPosition.z && _isAtDestination == true)
-        {
-
-            _isAtDestination = false;
-            transform.Rotate(0, 180, 0);
-        }
-        */
-
-
-        /*
-        if ((Mathf.Round (transform.position.x) == Mathf.Round(Destination.x) && Mathf.Round (transform.position.z)== Mathf.Round(_destination.z)))
-        {
-            _isAtDestination = true;
-        }
-
-        else if ((int)transform.position.x == (int)_startPosition.x&& (int)transform.position.z == (int)_startPosition.z && _isAtDestination==true) {
-
-            _isAtDestination = false;
-        }
-        */
-        /*
-        // problem with this, is that its way too specific to this object/scene 
-        if (_destination.x <= 0)
-        {
-
-            if (transform.position.x <= _destination.x && _isAtDestination == false)
-            {
-                _isAtDestination = true;
-            }
-
-        }
-        else if(_destination.x >0)
-        {
-            if (transform.position.x >= _destination.x &&_isAtDestination == false)
-            {
-                _isAtDestination = true;
-            }
-        }
-        
-        if (_startPosition.x <= 0)
-        {
-            if (transform.position.x >= _startPosition.x&& _isAtDestination == true)
-            {
-                _isAtDestination = false;
-            }
-        }
-        else if(_startPosition.x >=0)
-        {
-            if (transform.position.x <= _startPosition.x && _isAtDestination == true)
-            {
-                _isAtDestination = false;
-            }
-        }
-        */
+        } 
     }
 
 
